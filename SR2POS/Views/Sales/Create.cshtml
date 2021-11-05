@@ -103,10 +103,11 @@
                         url: "/api/product/" + $("#search").val(),
                         dataType: "json",
                         success: function (response) {
-                            var amount = Number(response.cost) * 1;
+                            console.log(response);
+                            var amount = Number(response.price) * 1;
                             var row = "<tr><td>" + response.productName + "</td>";
                             row += "<td><select name='unit[]' class='form-control'>" + options + "</select></td>";
-                            row += "<td>" + response.cost + "</td>";
+                            row += "<td>" + response.price + "</td>";
                             row += "<td><input type='number' class='form-control' name='qty[]' value='1'/></td>";
                             row += "<td>" + amount + "</td>";
                             row += "<td><input type='number' class='form-control' name='dis[]' value='0'/></td>";

@@ -30,16 +30,19 @@ namespace SR2POS.Controllers
 
         // GET: api/Product/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(string id)
+        public async Task<IActionResult> GetProduct(string id)
         {
-            var product = await _context.Product.FirstOrDefaultAsync(x => x.Barcode.Equals(id));
+            var product =await (from p in _context.Product
+                                 join pp in _context.ProductPrice on p.SaleUnit equals pp.UnitId
+                                 where p.Barcode.Equals(id)
+                                 select new
+                                 {
+                                     p.ProductId,
+                                     p.ProductName,
+                                     pp.Price
+                                 }).FirstOrDefaultAsync();
 
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return product;
+            return Ok(product);
         }
 
         // PUT: api/Product/5
