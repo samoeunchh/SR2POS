@@ -12,8 +12,10 @@ namespace SR2POS.Models
         [Key]
         public Guid SaleId { get; set; }
         [ForeignKey("Customer")]
+        [Display(Name ="Customer Name")]
         public Guid CustomerId { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name ="Issue Date")]
         public DateTime IssueDate { get; set; }
         [MaxLength(15)]
         public string InvoiceNumber { get; set; }
