@@ -77,7 +77,6 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-    var options = "";
     var productPrices = [];
     $(document).ready(function () {
         $("#save").click(function () {
@@ -124,19 +123,6 @@
             row += "<td><input class='form-control' name='price[]'/></td>";
             row += "<td><button class='btn btn-danger'><i class='fa fa-trash'></i></button></td></tr>";
             $("#t1").append(row);
-        });
-        $.ajax({
-            method: "GET",
-            url: "GetUnits",
-            contentType: "application/json",
-            success: function (data) {
-                $.each(data, function (i, v) {
-                    options += "<option value='"+ v.unitId +"'>"+ v.unitName +"</option>";
-                });
-            },
-            error: function (error) {
-                console.log(error);
-            }
         });
     });
 </script>
